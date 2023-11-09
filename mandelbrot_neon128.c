@@ -15,6 +15,7 @@
 #include <math.h>
 #include <stdint.h>
 
+
 int main(int argc, char* argv[])
 {
   /* Parse the command line arguments. */
@@ -34,20 +35,25 @@ int main(int argc, char* argv[])
   const float32x4_t ymin = vdupq_n_f32(atof(argv[3]));
   const float32x4_t ymax = vdupq_n_f32(atof(argv[4]));
 
-
+  printf("xmin: %f, xmax: %f, ymin: %f, ymax: %f\n", xmin[0], xmax[0], ymin[0], ymax[0]);
 
   /* Maximum number of iterations, at most 65535. */
   const int maxiter = (atoi(argv[5]));
 
   /* Image size, width is given, height is computed. */
-  const float32x4_t xres = vdupq_n_s32(strtol(argv[6], NULL, 10));
-  const float32x4_t yres = vdupq_n_s32(strtol(argv[7], NULL, 10)); //(xres*(ymax-ymin))/(xmax-xmin);
+  const float32x4_t xres = vdupq_n_f32(strtol(argv[6], NULL, 10));
+  const float32x4_t yres = vdupq_n_f32(strtol(argv[7], NULL, 10)); //(xres*(ymax-ymin))/(xmax-xmin);
 
+  printf("xres: %f, yres: %f\n", xres[0], yres[0]);
   /* The output file name */
   const char* filename = argv[8];
 
   /* Open the file and write the header. */
   FILE * fp = fopen(filename,"wb");
+  if (fp == NULL) {
+    printf("Error opening file: %s\n", filename);
+    exit(EXIT_FAILURE);
+  }
   char *comment="# Mandelbrot set";/* comment should start with # */
 
   /*write ASCII header to the file*/
@@ -70,34 +76,24 @@ int main(int argc, char* argv[])
     for(i = 0; i < strtol(argv[7], NULL, 10); i++) { //iterate through x axis
         float32x4_t mi = vdupq_n_f32(i);
         x = xmin + mi * stepx;
-        struct imaginary {
-        float Zx;
-        float Zy;
-        float Zx2;
-        float Zy2;
-        };
-        struct imaginaries {
-          size_t size;
-          float* Zxs;
-          float* Zys;
-          float* Zx2s;
-          float* Zy2s;
-        };
-        struct imaginary Z;
-        struct imaginaries const Zs;
-        Z.Zx = 0.0;
-        Z.Zy = 0.0;
-        Z.Zx2 = Z.Zx*Z.Zx;
-        Z.Zy2 = Z.Zy*Z.Zy;
+        float32x4_t Zx = vdupq_n_f32(0.0);
+        float32x4_t Zy = vdupq_n_f32(0.0);
+        float32x4_t Zx2;
+        float32x4_t Zy2;
       /* iterate the point */
-      for (k = 1; k < maxiter && (Z.Zx2 + Z.Zy2 < 4.0); k++) {
-            Z.Zy = 2 * Z.Zx * Z.Zy + y;
-            Z.Zx = Z.Zx2 - Z.Zy2 + x;
-            Z.Zx2 = Z.Zx * Z.Zx;
-            Z.Zy2 = Z.Zy * Z.Zy;
+        float32x4_t mmaxiter = vdupq_n_f32(maxiter);
+        float32x4_t mk = vdupq_n_f32(k);
+        float32x4_t mcl;
+        float32x4_t mcl2 = vdupq_n_f32(4.0);
+        float32x4_t two = vdupq_n_f32(2);
+      for (k = 1; vdups_laneq_u32(vandq_u32(vcltq_f32(mk,mmaxiter), vcltq_f32(vaddq_f32(Zx2,Zy2), mcl2)),3); k++) {
+            Zy = vaddq_f32(vmulq_f32(vmulq_f32(two,Zx),Zy),y);
+            Zx = vaddq_f32(vsubq_f32(Zx2,Zy2),x);
+            Zx2 = vmulq_f32(Zx, Zx);
+            Zy2 = vmulq_f32(Zy,Zy);
       };
       /* compute  pixel color and write it to file */
-      if (k >= maxiter) {
+      if (vdups_laneq_u32(vcgeq_f32(mk, mmaxiter),3)) {
         /* interior */
         // 48 bit color = 6 bytes
         const unsigned char black[] = {0, 0, 0, 0, 0, 0};
@@ -112,13 +108,15 @@ int main(int argc, char* argv[])
       */
       else {
         /* exterior */
-        unsigned char color[6];
-        color[0] = k >> 8; //MSB
-        color[1] = k & 255; //LSB
-        color[2] = k >> 8;
-        color[3] = k & 255;
-        color[4] = k >> 8;
-        color[5] = k & 255;
+        uint32x4_t color[6];
+        uint32x4_t mmk = vdupq_n_u32(k);
+        uint32x4_t ZSS = vdupq_n_u32(255);
+        color[0] = vshrq_n_u32(mmk, 8); //MSB
+        color[1] = vandq_u32(mmk,ZSS); //LSB
+        color[2] = vshrq_n_u32(mmk, 8);
+        color[3] = vandq_u32(mmk,ZSS);
+        color[4] = vshrq_n_u32(mmk, 8);
+        color[5] = vandq_u32(mmk,ZSS);
         fwrite(color, 6, 1, fp);
       };
     }
@@ -126,3 +124,4 @@ int main(int argc, char* argv[])
   fclose(fp);
   return 0;
 }
+

@@ -1,5 +1,25 @@
 /*
-  https://rosettacode.org/wiki/Mandelbrot_set#PPM_non_interactive VERY GOOD REFERENCE
+  This program is an adaptation of the Mandelbrot program
+  from the Programming Rosetta Stone, see
+  http://rosettacode.org/wiki/Mandelbrot_set
+
+  Compile the program with:
+
+  gcc -o mandelbrot -O4 mandelbrot.c
+
+  Usage:
+ 
+  ./mandelbrot <xmin> <xmax> <ymin> <ymax> <maxiter> <xres> <out.ppm>
+
+  Example:
+
+  ./mandelbrot 0.27085 0.27100 0.004640 0.004810 1000 1024 pic.ppm
+
+  The interior of Mandelbrot set is black, the levels are gray.
+  If you have very many levels, the picture is likely going to be quite
+  dark. You can postprocess it to fix the palette. For instance,
+  with ImageMagick you can do (assuming the picture was saved to pic.ppm):
+
   convert -normalize pic.ppm pic.png
 
   The resulting pic.png is still gray, but the levels will be nicer. You
@@ -7,9 +27,10 @@
 
   convert -negate -normalize -fill blue -tint 100 pic.ppm pic.png
 
+  See http://www.imagemagick.org/Usage/color_mods/ for what ImageMagick
+  can do. It can do a lot.
 */
 
-#include <arm_neon.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -25,18 +46,16 @@ int main(int argc, char* argv[])
   }
 
   /* The window in the plane. */
-  const float xmin = atof(argv[1]);
-  const float xmax = atof(argv[2]);
-  const float ymin = atof(argv[3]);
-  const float ymax = atof(argv[4]);
-
-
+  const double xmin = atof(argv[1]);
+  const double xmax = atof(argv[2]);
+  const double ymin = atof(argv[3]);
+  const double ymax = atof(argv[4]);
 
   /* Maximum number of iterations, at most 65535. */
   const uint16_t maxiter = (unsigned short)atoi(argv[5]);
 
   /* Image size, width is given, height is computed. */
-  const int xres = atoi(argv[6]);
+  const int xres = strtol(argv[6], NULL, 10);
   const int yres = (xres*(ymax-ymin))/(xmax-xmin);
 
   /* The output file name */
@@ -51,56 +70,40 @@ int main(int argc, char* argv[])
           "P6\n# Mandelbrot, xmin=%lf, xmax=%lf, ymin=%lf, ymax=%lf, maxiter=%d\n%d\n%d\n%d\n",
           xmin, xmax, ymin, ymax, maxiter, xres, yres, (maxiter < 256 ? 256 : maxiter));
 
-  /* Step size */
-  float stepx=(xmax-xmin)/xres;
-  float stepy=(ymax-ymin)/yres;
+  /* Precompute pixel width and height. */
+  double dx=(xmax-xmin)/xres;
+  double dy=(ymax-ymin)/yres;
 
-  float x, y; /* Coordinates of the current point in image*/
-  float Zx, Zy; /* Coordinates of the point in the mandelbrot set */
-  int i,j; /* Pixel iterator */
-  int k; /* Iteration iterator */
-
-  for (j = 0; j < yres; j++) { //iterate through y axis
-    y = ymin + j * stepy; 
-    for(i = 0; i < xres; i++) { //iterate through x axis
-        struct imaginary {
-        float Zx;
-        float Zy;
-        float Zx2;
-        float Zy2;
-        } __attribute__((aligned (64)));
-        struct imaginary Z;
-        Z.Zx = 0.0;
-        Z.Zy = 0.0;
-        Z.Zx2 = Z.Zx*Z.Zx;
-        Z.Zy2 = Z.Zy*Z.Zy;
-        x = xmin + i * stepx;
+  double x, y; /* Coordinates of the current point in the complex plane. */
+  double u, v; /* Coordinates of the iterated point. */
+  int i,j; /* Pixel counters */
+  int k; /* Iteration counter */
+  for (j = 0; j < yres; j++) {
+    y = ymax - j * dy;
+    for(i = 0; i < xres; i++) {
+      double u = 0.0;
+      double v= 0.0;
+      double u2 = u * u;
+      double v2 = v*v;
+      x = xmin + i * dx;
       /* iterate the point */
-      for (k = 1; k < maxiter && (Zx2 + Zy2 < 4.0); k++) {
-            Zy = 2 * Zx * Zy + y;
-            Zx = Zx2 - Zy2 + x;
-            Zx2 = Zx * Zx;
-            Zy2 = Zy * Zy;
+      for (k = 1; k < maxiter && (u2 + v2 < 4.0); k++) {
+            v = 2 * u * v + y;
+            u = u2 - v2 + x;
+            u2 = u * u;
+            v2 = v * v;
       };
       /* compute  pixel color and write it to file */
       if (k >= maxiter) {
         /* interior */
-        // 48 bit color = 6 bytes
         const unsigned char black[] = {0, 0, 0, 0, 0, 0};
         fwrite (black, 6, 1, fp);
       }
-      /*
-      By splitting k into high and low bytes by logic shifting 8 bits (1 byte), the code uses this information to create a gradient effect in the image. 
-      The high byte is used for the Red and Blue channels, and the low byte is used for the Green channel. 
-      This creates a smoother transition of colors in the image, with the high byte contributing to the overall color 
-      and the low byte fine-tuning the shade of green.
-      The high byte will be used for RB, and low for G
-      */
       else {
         /* exterior */
         unsigned char color[6];
-        color[0] = k >> 8; //MSB
-        color[1] = k & 255; //LSB
+        color[0] = k >> 8;
+        color[1] = k & 255;
         color[2] = k >> 8;
         color[3] = k & 255;
         color[4] = k >> 8;

@@ -30,21 +30,21 @@ int main(int argc, char* argv[])
   // const float ymin = atof(argv[3]);
   // const float ymax = atof(argv[4]);
   /* The window in the plane. */
-  const float32x4_t xmin = vdupq_n_f32(atof(argv[1]));
-  const float32x4_t xmax = vdupq_n_f32(atof(argv[2]));
-  const float32x4_t ymin = vdupq_n_f32(atof(argv[3]));
-  const float32x4_t ymax = vdupq_n_f32(atof(argv[4]));
+  const float xmin = (atof(argv[1]));
+  const float xmax = (atof(argv[2]));
+  const float ymin = (atof(argv[3]));
+  const float ymax = (atof(argv[4]));
 
-  printf("xmin: %f, xmax: %f, ymin: %f, ymax: %f\n", xmin[0], xmax[0], ymin[0], ymax[0]);
+  printf("xmin: %f, xmax: %f, ymin: %f, ymax: %f\n", xmin, xmax, ymin, ymax);
 
   /* Maximum number of iterations, at most 65535. */
   const int maxiter = (atoi(argv[5]));
 
   /* Image size, width is given, height is computed. */
-  const float32x4_t xres = vdupq_n_f32(strtol(argv[6], NULL, 10));
-  const float32x4_t yres = vdupq_n_f32(strtol(argv[7], NULL, 10)); //(xres*(ymax-ymin))/(xmax-xmin);
+  const int xres = (strtol(argv[6], NULL, 10));
+  const int yres = (strtol(argv[7], NULL, 10)); //(xres*(ymax-ymin))/(xmax-xmin);
 
-  printf("xres: %f, yres: %f\n", xres[0], yres[0]);
+  printf("xres: %i, yres: %i\n", xres, yres);
   /* The output file name */
   const char* filename = argv[8];
 
@@ -62,35 +62,39 @@ int main(int argc, char* argv[])
           maxiter);
 
   /* Step size */
-  const float32x4_t stepx=(vsubq_f32(xmax,xmin)/xres);
-  const float32x4_t stepy=(vsubq_f32(ymax,ymin)/yres);
+  float stepx=((xmax - xmin)/xres);
+  float stepy=((ymax-ymin)/yres);
 
-  float32x4_t x, y; /* Coordinates of the current point in image*/
+  float x, y; /* Coordinates of the current point in image*/
    /* Coordinates of the point in the mandelbrot set */
   int i,j; /* Pixel iterator */
   int k; /* Iteration iterator */
 
-  for (j = 0; j < strtol(argv[6], NULL, 10); j++) { //iterate through y axis
-    float32x4_t mj = vdupq_n_f32(j);
-    y = ymin + mj * stepy; 
+  for (j = 0; j < maxiter; j++) { //iterate through y axis
+    y = ymin + j * stepy; 
+    float32x4_t my = vdupq_n_f32(y);
     for(i = 0; i < strtol(argv[7], NULL, 10); i++) { //iterate through x axis
-        float32x4_t mi = vdupq_n_f32(i);
-        x = xmin + mi * stepx;
-        float32x4_t Zx = vdupq_n_f32(0.0);
-        float32x4_t Zy = vdupq_n_f32(0.0);
-        float32x4_t Zx2;
-        float32x4_t Zy2;
+        x = xmin + i * stepx;
+        float32x4_t mx = vdupq_n_f32(x);
+        float Zx = 0.0;
+        float Zy = 0.0;
+        float Zx2 = Zx*Zx;
+        float Zy2 = Zy*Zy;
+        float32x4_t ZZx = vdupq_n_f32(Zx);
+        float32x4_t ZZy = vdupq_n_f32(Zy);
+        float32x4_t ZZx2;
+        float32x4_t ZZy2;
       /* iterate the point */
         float32x4_t mmaxiter = vdupq_n_f32(maxiter);
         float32x4_t mk = vdupq_n_f32(k);
         float32x4_t mcl;
         float32x4_t mcl2 = vdupq_n_f32(4.0);
         float32x4_t two = vdupq_n_f32(2);
-      for (k = 1; vdups_laneq_u32(vandq_u32(vcltq_f32(mk,mmaxiter), vcltq_f32(vaddq_f32(Zx2,Zy2), mcl2)),3); k++) {
-            Zy = vaddq_f32(vmulq_f32(vmulq_f32(two,Zx),Zy),y);
-            Zx = vaddq_f32(vsubq_f32(Zx2,Zy2),x);
-            Zx2 = vmulq_f32(Zx, Zx);
-            Zy2 = vmulq_f32(Zy,Zy);
+      for (k = 1; (k < maxiter && (Zx2 + Zy2 < 4.0)); k++) {
+            ZZy = vaddq_f32(vmulq_f32(vmulq_f32(two,ZZx),ZZy),my);
+            ZZx = vaddq_f32(vsubq_f32(ZZx2,ZZy2),mx);
+            ZZx2 = vmulq_f32(ZZx, ZZx);
+            ZZy2 = vmulq_f32(ZZy,ZZy);
       };
       /* compute  pixel color and write it to file */
       if (vdups_laneq_u32(vcgeq_f32(mk, mmaxiter),3)) {

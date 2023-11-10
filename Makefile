@@ -8,3 +8,5 @@ mandelbrot_neon128_v2: mandelbrot_neon128.c
 	gcc $(CFLAGS) -o mandelbrot -march=armv8-a -O2 mandelbrot_neon128_v2.c 
 mandelbrot_exp: mandelbrot_exp.c
 	gcc -o mandelbrot mandelbrot_exp.c $(CFLAGS) -lm `sdl2-config --cflags --libs`
+mandelbrot_working: mandelbrot_working.c
+	gcc -o mandelbrot mandelbrot_working.c $(CFLAGS) -lglut -lGLU -lGL -lm

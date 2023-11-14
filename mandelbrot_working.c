@@ -123,7 +123,7 @@ void calc_mandel()
     int i, j, iter, min = max_iter, max = 0;
     rgb_t *px;
     double x, y;
-
+	#pragma omp parallel for schedule(dynamic, 1)
     for (i = 0; i < height; i++) {
         px = tex[i];
         y = (i - (float)height/2) * scale + cy;
@@ -135,12 +135,14 @@ void calc_mandel()
             float32x4_t vzx2 = vdupq_n_f32(0);
             float32x4_t vzy2 = vdupq_n_f32(0);
             uint32x4_t viter = vdupq_n_u32(0);
-
-            for (iter = 0; iter < max_iter; iter++) {
-                uint32x4_t mask = vcleq_f32(vaddq_f32(vzx2, vzy2), vdupq_n_f32(4.0));
-                if (vmaxvq_u32(mask) == 0xFFFF) {
+			uint32x4_t mask = vcleq_f32(vaddq_f32(vzx2, vzy2), vdupq_n_f32(4.0));
+            for (; iter < max_iter; iter++) {
+                if (vgetq_lane_u32(mask, 0) == 0 &&
+                    vgetq_lane_u32(mask, 1) == 0 &&
+                    vgetq_lane_u32(mask, 2) == 0 &&
+                    vgetq_lane_u32(mask, 3) == 0)
                     break;
-                }
+                
 
                 vzy = vmlaq_f32(vy, vmulq_f32(vmulq_f32(vzx, vzy), vdupq_n_f32(2.0)), vy);
                 vzx = vaddq_f32(vsubq_f32(vzx2, vzy2), vx);
@@ -148,26 +150,27 @@ void calc_mandel()
                 vzy2 = vmulq_f32(vzy, vzy);
                 viter = vaddw_u16(viter, vand_u16(vmovn_u32(mask), vdup_n_u16(1)));
             }
-
-            uint32_t iter_arr[4];
-            for (int k = 0; k < 4; k++) {
-                iter = iter_arr[k];
+			            // uint32_t iter_arr[4];
+            // for (int k = 0; k < 4; k++) {
+                // iter = iter_arr[k];
                 if (iter < min) min = iter;
                 if (iter > max) max = iter;
-                px[k].r = iter;
-                px[k].g = iter;
-                px[k].b = iter;
-            }
-        }
+                // px[k].r = iter;
+                // px[k].g = iter;
+                // px[k].b = iter;
+				*(unsigned short *)px = iter;
+		}
     }
+        
+    
 
-    for (i = 0; i < height; i++) {
-        px = tex[i];
-        for (j = 0; j < width; j++, px++) {
-            hsv_to_rgb(px->r, min, max, px);
+    for (i = 0; i < height; i++) 
+        for (j = 0, px = tex[i]; j  < width; j++, px++) {
+            hsv_to_rgb(*(unsigned short *)px, min, max, px);
         }
-    }
 }
+    
+
 void alloc_tex()
 {
 	int i, ow = tex_w, oh = tex_h;

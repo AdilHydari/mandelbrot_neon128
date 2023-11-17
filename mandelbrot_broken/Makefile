@@ -10,3 +10,5 @@ mandelbrot_exp: mandelbrot_exp.c
 	gcc -o mandelbrot mandelbrot_exp.c $(CFLAGS) -lm `sdl2-config --cflags --libs`
 mandelbrot_working: mandelbrot_working.c
 	gcc -o mandelbrot mandelbrot_working.c $(CFLAGS) -lglut -lGLU -lGL -lm
+mandel_working_v2: mandel_working_v2.c
+	gcc -o mandelbrot mandel_working_v2.c $(CFLAGS) -lglut -lGLU -lGL -lm

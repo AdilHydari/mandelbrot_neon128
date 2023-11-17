@@ -109,7 +109,7 @@ int main(int argc, char* argv[])
         mk = vmulq_f32(mk, iter_scale); //mk is multiplied by iteration scale in order to reflect the number of iterations
         mk= vrecpeq_f32(vrsqrteq_f32(mk)); //an inverse square root is performed on mk in order to normalize the mk vector into a unit vector with a length of one, this can then be reinterpreted as an unsigned integer, as it is only one lane. From there, we can cast a type of (unsigned char*)&, which is the type of the color array; which stores all the pixels for the madelbrot set. We can then write those pixels into a temporary allocated pixel matrix, with the same parameters as defined by the color matrix, from there it is a simple matrix copy from the temp matrix to the actual allocated image (color).
         mk = vmulq_f32(mk, depth_scale); //mk is multiplied by depth scale in order to reflect the depth (of the pixel) in the mandelbrot set
-        unsigned char *color =malloc(spec.width * spec.height * 3)
+        unsigned char *color =malloc(spec.width * spec.height * 3);
         
         if (k >= s->iterations) {
         /* interior */

@@ -91,10 +91,10 @@ int main(int argc, char* argv[])
         float32x4_t mcl2 = vdupq_n_f32(4.0);
         float32x4_t two = vdupq_n_f32(2);
       for (k = 1; (k < maxiter && (Zx2 + Zy2 < 4.0)); k++) {
-            ZZy = vaddq_f32(vmulq_f32(vmulq_f32(two,ZZx),ZZy),my);
-            ZZx = vaddq_f32(vsubq_f32(ZZx2,ZZy2),mx);
             ZZx2 = vmulq_f32(ZZx, ZZx);
             ZZy2 = vmulq_f32(ZZy,ZZy);
+            ZZy = vaddq_f32(vmulq_f32(vmulq_f32(two,ZZx),ZZy),my);
+            ZZx = vaddq_f32(vsubq_f32(ZZx2,ZZy2),mx);
       };
       /* compute  pixel color and write it to file */
       if (vdups_laneq_u32(vcgeq_f32(mk, mmaxiter),3)) {

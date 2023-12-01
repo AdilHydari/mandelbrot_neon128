@@ -1,5 +1,5 @@
 	.arch armv8-a
-	.file	"neon_copy.cc"
+	.file	"neon.cc"
 	.text
 #APP
 	.globl _ZSt21ios_base_library_initv
@@ -10,299 +10,14 @@
 	.weak	_ZNKSt5ctypeIcE8do_widenEc
 	.type	_ZNKSt5ctypeIcE8do_widenEc, %function
 _ZNKSt5ctypeIcE8do_widenEc:
-.LFB5654:
+.LFB7188:
 	.cfi_startproc
 	mov	w0, w1
 	ret
 	.cfi_endproc
-.LFE5654:
+.LFE7188:
 	.size	_ZNKSt5ctypeIcE8do_widenEc, .-_ZNKSt5ctypeIcE8do_widenEc
 	.text
-	.align	2
-	.p2align 4,,11
-	.type	_ZN23MandelbrotMultiThreadedI11ColorSchemeE19RenderMultiThreadedEPN7EasyBMP5ImageE._omp_fn.0, %function
-_ZN23MandelbrotMultiThreadedI11ColorSchemeE19RenderMultiThreadedEPN7EasyBMP5ImageE._omp_fn.0:
-.LFB9240:
-	.cfi_startproc
-	stp	x29, x30, [sp, -208]!
-	.cfi_def_cfa_offset 208
-	.cfi_offset 29, -208
-	.cfi_offset 30, -200
-	mov	x3, 1
-	mov	x2, x3
-	mov	x29, sp
-	stp	x19, x20, [sp, 16]
-	add	x1, sp, 159
-	add	x5, sp, 120
-	.cfi_offset 19, -192
-	.cfi_offset 20, -184
-	ldp	x20, x19, [x0]
-	stp	x23, x24, [sp, 48]
-	.cfi_offset 23, -160
-	.cfi_offset 24, -152
-	and	x23, x1, -32
-	add	x4, sp, 112
-	mov	x0, 0
-	ldrsw	x1, [x20]
-	bl	GOMP_loop_nonmonotonic_dynamic_start
-	tbz	x0, 0, .L4
-	stp	x21, x22, [sp, 32]
-	.cfi_offset 22, -168
-	.cfi_offset 21, -176
-	add	x22, x20, 40
-	stp	x25, x26, [sp, 64]
-	.cfi_offset 26, -136
-	.cfi_offset 25, -144
-	mov	x26, x23
-	stp	x27, x28, [sp, 80]
-	.cfi_offset 28, -120
-	.cfi_offset 27, -128
-.L8:
-	ldr	w0, [x20, 4]
-	ldr	x1, [sp, 112]
-	ldr	w27, [sp, 120]
-	mov	w25, w1
-	cmp	w0, 0
-	ble	.L5
-	sub	w13, w0, #1
-	mov	w0, 48
-	ldp	w12, w11, [x26, 16]
-	lsr	w13, w13, 4
-	add	w13, w13, 1
-	sbfiz	x1, x1, 3, 32
-	ldp	w10, w9, [x26, 24]
-	and	w24, w12, 15
-	ldp	w8, w7, [x26, 48]
-	umull	x13, w13, w0
-	ldp	w6, w5, [x26, 56]
-	and	w23, w11, 15
-	and	w21, w10, 15
-	and	w18, w9, 15
-	and	w17, w8, 15
-	and	w16, w7, 15
-	and	w15, w6, 15
-	and	w14, w5, 15
-	str	w27, [sp, 100]
-	str	x26, [sp, 104]
-.L7:
-	mov	x0, 0
-	str	w25, [sp, 96]
-	.p2align 3,,7
-.L6:
-	ldr	x2, [x19]
-	add	x25, x0, 3
-	ldrh	w26, [x20, 40]
-	add	x4, x0, 6
-	ldrb	w30, [x22]
-	ldr	x2, [x2, x1]
-	ldrb	w27, [x22, 2]
-	add	x3, x2, x0
-	strh	w26, [x2, x0]
-	negs	w2, w12
-	and	w2, w2, 15
-	add	x26, x0, 9
-	strb	w27, [x3, 2]
-	csneg	w2, w24, w2, mi
-	ldr	x3, [x19]
-	ldrh	w28, [x20, 41]
-	ldr	x27, [x3, x1]
-	sbfiz	x3, x2, 1, 32
-	add	x2, x3, w2, sxtw
-	add	x3, x20, x2
-	add	x2, x27, x25
-	strb	w30, [x27, x25]
-	strh	w28, [x2, 1]
-	ldr	x2, [x19]
-	ldrh	w28, [x20, 40]
-	ldrb	w30, [x22]
-	ldr	x2, [x2, x1]
-	ldrb	w27, [x22, 2]
-	add	x25, x2, x4
-	strh	w28, [x2, x4]
-	negs	w2, w11
-	and	w2, w2, 15
-	strb	w27, [x25, 2]
-	csneg	w2, w23, w2, mi
-	add	x25, x0, 12
-	ldr	x4, [x19]
-	ldrh	w28, [x20, 41]
-	ldr	x27, [x4, x1]
-	sbfiz	x4, x2, 1, 32
-	add	x2, x4, w2, sxtw
-	add	x4, x20, x2
-	add	x2, x27, x26
-	strb	w30, [x27, x26]
-	add	x26, x0, 15
-	strh	w28, [x2, 1]
-	negs	w2, w10
-	and	w2, w2, 15
-	ldr	x30, [x19]
-	csneg	w2, w21, w2, mi
-	ldrh	w27, [x3, 40]
-	ldrb	w28, [x3, 42]
-	ldr	x3, [x30, x1]
-	sbfiz	x30, x2, 1, 32
-	add	x2, x30, w2, sxtw
-	add	x30, x3, x25
-	add	x2, x20, x2
-	strh	w27, [x3, x25]
-	negs	w3, w9
-	and	w3, w3, 15
-	add	x27, x0, 18
-	strb	w28, [x30, 2]
-	csneg	w3, w18, w3, mi
-	ldrb	w25, [x4, 42]
-	ldrh	w30, [x4, 40]
-	sbfiz	x4, x3, 1, 32
-	ldr	x28, [x19]
-	add	x3, x4, w3, sxtw
-	add	x3, x20, x3
-	ldr	x4, [x28, x1]
-	add	x28, x0, 21
-	strh	w30, [x4, x26]
-	add	x4, x4, x26
-	add	x30, x0, 24
-	strb	w25, [x4, 2]
-	ldr	x25, [x19]
-	ldrh	w4, [x2, 40]
-	ldrb	w2, [x2, 42]
-	ldr	x26, [x25, x1]
-	add	x25, x0, 27
-	strh	w4, [x26, x27]
-	add	x26, x26, x27
-	add	x4, x0, 30
-	strb	w2, [x26, 2]
-	add	x26, x0, 33
-	ldr	x2, [x19]
-	ldrh	w27, [x3, 40]
-	ldrb	w3, [x3, 42]
-	ldr	x2, [x2, x1]
-	strh	w27, [x2, x28]
-	add	x2, x2, x28
-	strb	w3, [x2, 2]
-	ldr	x2, [x19]
-	ldrh	w28, [x20, 40]
-	ldrb	w27, [x22]
-	ldr	x2, [x2, x1]
-	ldrb	w3, [x22, 2]
-	strh	w28, [x2, x30]
-	add	x28, x2, x30
-	negs	w2, w8
-	and	w2, w2, 15
-	strb	w3, [x28, 2]
-	csneg	w2, w17, w2, mi
-	ldr	x3, [x19]
-	ldrh	w30, [x20, 41]
-	ldr	x28, [x3, x1]
-	sbfiz	x3, x2, 1, 32
-	add	x2, x3, w2, sxtw
-	add	x3, x20, x2
-	add	x2, x28, x25
-	strb	w27, [x28, x25]
-	add	x25, x0, 36
-	strh	w30, [x2, 1]
-	ldr	x2, [x19]
-	ldrb	w30, [x22]
-	ldrb	w27, [x22, 2]
-	ldrh	w28, [x20, 40]
-	ldr	x2, [x2, x1]
-	strh	w28, [x2, x4]
-	add	x4, x2, x4
-	negs	w2, w7
-	and	w2, w2, 15
-	strb	w27, [x4, 2]
-	csneg	w2, w16, w2, mi
-	ldr	x4, [x19]
-	ldrh	w28, [x20, 41]
-	ldr	x27, [x4, x1]
-	sbfiz	x4, x2, 1, 32
-	add	x2, x4, w2, sxtw
-	add	x4, x20, x2
-	add	x2, x27, x26
-	strb	w30, [x27, x26]
-	add	x26, x0, 39
-	strh	w28, [x2, 1]
-	negs	w2, w6
-	and	w2, w2, 15
-	ldr	x30, [x19]
-	csneg	w2, w15, w2, mi
-	ldrh	w27, [x3, 40]
-	ldrb	w28, [x3, 42]
-	ldr	x3, [x30, x1]
-	sbfiz	x30, x2, 1, 32
-	add	x2, x30, w2, sxtw
-	add	x30, x3, x25
-	add	x2, x20, x2
-	strh	w27, [x3, x25]
-	negs	w3, w5
-	and	w3, w3, 15
-	add	x25, x0, 42
-	strb	w28, [x30, 2]
-	csneg	w3, w14, w3, mi
-	ldr	x30, [x19]
-	ldrh	w27, [x4, 40]
-	ldrb	w28, [x4, 42]
-	ldr	x4, [x30, x1]
-	sbfiz	x30, x3, 1, 32
-	add	x3, x30, w3, sxtw
-	add	x30, x4, x26
-	add	x3, x20, x3
-	strh	w27, [x4, x26]
-	add	x4, x0, 45
-	add	x0, x0, 48
-	strb	w28, [x30, 2]
-	ldr	x26, [x19]
-	ldrh	w27, [x2, 40]
-	ldrb	w28, [x2, 42]
-	ldr	x2, [x26, x1]
-	add	x26, x2, x25
-	strh	w27, [x2, x25]
-	strb	w28, [x26, 2]
-	ldr	x2, [x19]
-	ldrb	w26, [x3, 42]
-	ldrh	w25, [x3, 40]
-	ldr	x2, [x2, x1]
-	add	x3, x2, x4
-	strh	w25, [x2, x4]
-	strb	w26, [x3, 2]
-	cmp	x13, x0
-	bne	.L6
-	ldp	w25, w0, [sp, 96]
-	add	x1, x1, 8
-	add	w25, w25, 1
-	cmp	w0, w25
-	bgt	.L7
-	ldr	x26, [sp, 104]
-.L5:
-	add	x1, sp, 120
-	add	x0, sp, 112
-	bl	GOMP_loop_nonmonotonic_dynamic_next
-	tbnz	x0, 0, .L8
-	ldp	x21, x22, [sp, 32]
-	.cfi_restore 22
-	.cfi_restore 21
-	ldp	x25, x26, [sp, 64]
-	.cfi_restore 26
-	.cfi_restore 25
-	ldp	x27, x28, [sp, 80]
-	.cfi_restore 28
-	.cfi_restore 27
-.L4:
-	bl	GOMP_loop_end_nowait
-	ldp	x19, x20, [sp, 16]
-	ldp	x23, x24, [sp, 48]
-	ldp	x29, x30, [sp], 208
-	.cfi_restore 30
-	.cfi_restore 29
-	.cfi_restore 23
-	.cfi_restore 24
-	.cfi_restore 19
-	.cfi_restore 20
-	.cfi_def_cfa_offset 0
-	ret
-	.cfi_endproc
-.LFE9240:
-	.size	_ZN23MandelbrotMultiThreadedI11ColorSchemeE19RenderMultiThreadedEPN7EasyBMP5ImageE._omp_fn.0, .-_ZN23MandelbrotMultiThreadedI11ColorSchemeE19RenderMultiThreadedEPN7EasyBMP5ImageE._omp_fn.0
 	.align	2
 	.p2align 4,,11
 	.type	_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_.isra.0, %function
@@ -322,11 +37,11 @@ _ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_.isra.0:
 	ldr	x0, [x0, -24]
 	add	x0, x19, x0
 	ldr	x20, [x0, 240]
-	cbz	x20, .L22
+	cbz	x20, .L9
 	ldrb	w0, [x20, 56]
-	cbz	w0, .L18
+	cbz	w0, .L5
 	ldrb	w1, [x20, 67]
-.L19:
+.L6:
 	mov	x0, x19
 	bl	_ZNSo3putEc
 	ldp	x19, x20, [sp, 16]
@@ -338,7 +53,7 @@ _ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_.isra.0:
 	.cfi_restore 20
 	.cfi_def_cfa_offset 0
 	b	_ZNSo5flushEv
-.L18:
+.L5:
 	.cfi_restore_state
 	mov	x0, x20
 	bl	_ZNKSt5ctypeIcE13_M_widen_initEv
@@ -347,16 +62,16 @@ _ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_.isra.0:
 	add	x0, x0, :lo12:_ZNKSt5ctypeIcE8do_widenEc
 	ldr	x2, [x1, 48]
 	cmp	x2, x0
-	bne	.L23
+	bne	.L10
 	mov	w1, 10
-	b	.L19
-.L23:
+	b	.L6
+.L10:
 	mov	w1, 10
 	mov	x0, x20
 	blr	x2
 	and	w1, w0, 255
-	b	.L19
-.L22:
+	b	.L6
+.L9:
 	bl	_ZSt16__throw_bad_castv
 	.cfi_endproc
 .LFE9249:
@@ -380,26 +95,26 @@ _ZN7EasyBMP5ImageD2Ev:
 	.cfi_offset 19, -16
 	mov	x19, x0
 	ldr	x0, [x0]
-	cbz	x0, .L25
+	cbz	x0, .L12
 	ldr	x1, [x0]
-	cbz	x1, .L26
+	cbz	x1, .L13
 	mov	x0, x1
 	ldr	x1, [x0, -8]!
 	add	x1, x1, x1, lsl 1
 	add	x1, x1, 8
 	bl	_ZdaPvm
 	ldr	x0, [x19]
-	cbnz	x0, .L26
+	cbnz	x0, .L13
 	str	xzr, [x19]
-.L25:
+.L12:
 	ldr	x0, [x19, 544]
 	add	x1, x19, 560
 	cmp	x0, x1
-	beq	.L28
+	beq	.L15
 	ldr	x1, [x19, 560]
 	add	x1, x1, 1
 	bl	_ZdlPvm
-.L28:
+.L15:
 	adrp	x1, _ZTVSt14basic_ofstreamIcSt11char_traitsIcEE+64
 	adrp	x2, _ZTVSt13basic_filebufIcSt11char_traitsIcEE+16
 	add	x1, x1, :lo12:_ZTVSt14basic_ofstreamIcSt11char_traitsIcEE+64
@@ -412,7 +127,7 @@ _ZN7EasyBMP5ImageD2Ev:
 .LEHB0:
 	bl	_ZNSt13basic_filebufIcSt11char_traitsIcEE5closeEv
 .LEHE0:
-.L30:
+.L17:
 	add	x0, x19, 144
 	bl	_ZNSt12__basic_fileIcED1Ev
 	adrp	x0, _ZTVSt15basic_streambufIcSt11char_traitsIcEE+16
@@ -440,15 +155,15 @@ _ZN7EasyBMP5ImageD2Ev:
 	.cfi_def_cfa_offset 0
 	b	_ZNSt8ios_baseD2Ev
 	.p2align 2,,3
-.L26:
+.L13:
 	.cfi_restore_state
 	bl	_ZdaPv
 	str	xzr, [x19]
-	b	.L25
-.L31:
+	b	.L12
+.L18:
 	bl	__cxa_begin_catch
 	bl	__cxa_end_catch
-	b	.L30
+	b	.L17
 	.cfi_endproc
 .LFE8388:
 	.global	__gxx_personality_v0
@@ -464,7 +179,7 @@ _ZN7EasyBMP5ImageD2Ev:
 .LLSDACSB8388:
 	.uleb128 .LEHB0-.LFB8388
 	.uleb128 .LEHE0-.LEHB0
-	.uleb128 .L31-.LFB8388
+	.uleb128 .L18-.LFB8388
 	.uleb128 0x1
 .LLSDACSE8388:
 	.byte	0x1
@@ -524,16 +239,16 @@ _ZN7EasyBMP5Image5WriteEv:
 	.cfi_offset 25, -96
 	.cfi_offset 26, -88
 	bl	_ZNSt13basic_filebufIcSt11char_traitsIcEE4openEPKcSt13_Ios_Openmode
-	cbz	x0, .L120
+	cbz	x0, .L107
 	ldr	x0, [x22, 24]
 	mov	w1, 0
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	bl	_ZNSt9basic_iosIcSt11char_traitsIcEE5clearESt12_Ios_Iostate
-.L44:
+.L31:
 	add	x0, x22, 144
 	bl	_ZNKSt12__basic_fileIcE7is_openEv
-	tbz	x0, 0, .L121
+	tbz	x0, 0, .L108
 	ldr	x3, [x22, 8]
 	mov	w2, 4
 	mov	w26, 0
@@ -544,10 +259,10 @@ _ZN7EasyBMP5Image5WriteEv:
 	csneg	x1, x4, x1, mi
 	sub	w1, w2, w1
 	cmp	w1, w2
-	beq	.L49
+	beq	.L36
 	mov	w26, w1
 	add	x0, x0, w1, uxtw
-.L49:
+.L36:
 	ldp	x4, x2, [x22, 16]
 	mov	w1, 66
 	strb	w1, [sp, 103]
@@ -565,7 +280,7 @@ _ZN7EasyBMP5Image5WriteEv:
 	str	xzr, [sp, 140]
 	ldr	x2, [x2, 16]
 	str	xzr, [sp, 148]
-	cbnz	x2, .L122
+	cbnz	x2, .L109
 	mov	x0, x20
 	bl	_ZNSo3putEc
 	mov	x0, x20
@@ -575,16 +290,16 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x2, [x2, -24]
 	add	x2, x0, x2
 	ldr	x2, [x2, 16]
-	cbz	x2, .L52
-.L125:
+	cbz	x2, .L39
+.L112:
 	add	x1, sp, 103
 	mov	x2, 1
 	bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
-.L53:
+.L40:
 	add	x21, sp, 104
 	add	x23, sp, 128
 	mov	x24, x21
-.L63:
+.L50:
 	ldr	x0, [x20]
 	ldr	w19, [x24]
 	and	w1, w19, 255
@@ -592,8 +307,8 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L54
-.L129:
+	cbz	x0, .L41
+.L116:
 	add	x1, sp, 103
 	mov	x0, x20
 	mov	x2, 1
@@ -604,8 +319,8 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L56
-.L130:
+	cbz	x0, .L43
+.L117:
 	add	x1, sp, 103
 	mov	x0, x20
 	mov	x2, 1
@@ -616,78 +331,78 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L58
-.L131:
+	cbz	x0, .L45
+.L118:
 	add	x1, sp, 103
 	mov	x0, x20
 	mov	x2, 1
 	bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
-.L59:
+.L46:
 	ldr	x0, [x20]
 	lsr	w1, w19, 24
 	strb	w1, [sp, 103]
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L60
+	cbz	x0, .L47
 	add	x1, sp, 103
 	mov	x0, x20
 	mov	x2, 1
 	add	x24, x24, 4
 	bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
 	cmp	x23, x24
-	bne	.L63
-.L62:
+	bne	.L50
+.L49:
 	ldr	x0, [x22, 24]
 	mov	w1, 1
 	strb	w1, [sp, 103]
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L64
+	cbz	x0, .L51
 	add	x1, sp, 103
 	mov	x0, x20
 	mov	x2, 1
 	bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
 	mov	x19, x0
-.L65:
+.L52:
 	strb	wzr, [sp, 103]
 	ldr	x0, [x19]
 	ldr	x0, [x0, -24]
 	add	x0, x19, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L66
+	cbz	x0, .L53
 	mov	x0, x19
 	add	x1, sp, 103
 	mov	x2, 1
 	bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
 	mov	x19, x0
-.L67:
+.L54:
 	mov	w1, 24
 	strb	w1, [sp, 103]
 	ldr	x0, [x19]
 	ldr	x0, [x0, -24]
 	add	x0, x19, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L68
+	cbz	x0, .L55
 	mov	x0, x19
 	add	x1, sp, 103
 	mov	x2, 1
 	bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
 	mov	x19, x0
-.L69:
+.L56:
 	strb	wzr, [sp, 103]
 	ldr	x0, [x19]
 	ldr	x0, [x0, -24]
 	add	x0, x19, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L70
+	cbz	x0, .L57
 	mov	x0, x19
 	add	x1, sp, 103
 	mov	x2, 1
 	bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
 	.p2align 3,,7
-.L81:
+.L68:
 	ldr	x0, [x20]
 	ldr	w19, [x21, 28]
 	and	w1, w19, 255
@@ -695,8 +410,8 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L72
-.L126:
+	cbz	x0, .L59
+.L113:
 	add	x1, sp, 103
 	mov	x0, x20
 	mov	x2, 1
@@ -707,8 +422,8 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L74
-.L127:
+	cbz	x0, .L61
+.L114:
 	add	x1, sp, 103
 	mov	x0, x20
 	mov	x2, 1
@@ -719,41 +434,41 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L76
-.L128:
+	cbz	x0, .L63
+.L115:
 	add	x1, sp, 103
 	mov	x0, x20
 	mov	x2, 1
 	bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
-.L77:
+.L64:
 	ldr	x0, [x20]
 	lsr	w1, w19, 24
 	strb	w1, [sp, 103]
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L78
+	cbz	x0, .L65
 	add	x1, sp, 103
 	mov	x0, x20
 	mov	x2, 1
 	add	x21, x21, 4
 	bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
 	cmp	x21, x23
-	bne	.L81
-.L80:
+	bne	.L68
+.L67:
 	ldr	x25, [x22, 16]
 	subs	x25, x25, #1
-	bmi	.L83
+	bmi	.L70
 	ldr	x0, [x22, 8]
 	cmp	x0, 0
-	ble	.L99
+	ble	.L86
 	.p2align 3,,7
-.L93:
+.L80:
 	lsl	x24, x25, 3
 	mov	x21, 0
 	mov	x23, 0
 	.p2align 3,,7
-.L91:
+.L78:
 	ldr	x0, [x22]
 	ldr	x2, [x20]
 	ldr	x0, [x0, x24]
@@ -763,13 +478,13 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x2, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L84
+	cbz	x0, .L71
 	add	x1, sp, 103
 	mov	x0, x20
 	mov	x2, 1
 	bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
 	mov	x19, x0
-.L85:
+.L72:
 	ldr	x0, [x22]
 	ldr	x0, [x0, x24]
 	add	x0, x0, x21
@@ -779,13 +494,13 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x19, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L86
+	cbz	x0, .L73
 	mov	x0, x19
 	add	x1, sp, 103
 	mov	x2, 1
 	bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
 	mov	x19, x0
-.L87:
+.L74:
 	ldr	x0, [x22]
 	ldr	x0, [x0, x24]
 	ldrb	w1, [x0, x21]
@@ -794,7 +509,7 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x19, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L88
+	cbz	x0, .L75
 	mov	x0, x19
 	add	x1, sp, 103
 	mov	x2, 1
@@ -803,24 +518,24 @@ _ZN7EasyBMP5Image5WriteEv:
 	add	x23, x23, 1
 	add	x21, x21, 3
 	cmp	x23, x0
-	blt	.L91
-.L99:
+	blt	.L78
+.L86:
 	add	w21, w26, 1
-	cbnz	w26, .L92
+	cbnz	w26, .L79
 	sub	x25, x25, #1
 	cmn	x25, #1
-	beq	.L83
-.L123:
+	beq	.L70
+.L110:
 	cmp	x0, 0
-	bgt	.L93
+	bgt	.L80
 	sub	x25, x25, #1
 	cmn	x25, #1
-	bne	.L123
+	bne	.L110
 	.p2align 3,,7
-.L83:
+.L70:
 	mov	x0, x27
 	bl	_ZNSt13basic_filebufIcSt11char_traitsIcEE5closeEv
-	cbz	x0, .L124
+	cbz	x0, .L111
 	ldp	x19, x20, [sp, 16]
 	ldp	x21, x22, [sp, 32]
 	ldp	x23, x24, [sp, 48]
@@ -841,7 +556,7 @@ _ZN7EasyBMP5Image5WriteEv:
 	.cfi_restore 20
 	.cfi_def_cfa_offset 0
 	ret
-.L122:
+.L109:
 	.cfi_restore_state
 	add	x1, sp, 103
 	mov	x2, 1
@@ -853,72 +568,72 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x2, [x2, -24]
 	add	x2, x0, x2
 	ldr	x2, [x2, 16]
-	cbnz	x2, .L125
-.L52:
+	cbnz	x2, .L112
+.L39:
 	bl	_ZNSo3putEc
-	b	.L53
+	b	.L40
 	.p2align 2,,3
-.L95:
+.L82:
 	mov	x0, x20
 	mov	w1, 0
 	add	w19, w19, 1
 	bl	_ZNSo3putEc
 	cmp	w19, w21
-	bne	.L98
-.L117:
+	bne	.L85
+.L104:
 	sub	x25, x25, #1
 	cmn	x25, #1
-	beq	.L83
+	beq	.L70
 	ldr	x0, [x22, 8]
 	cmp	x0, 0
-	bgt	.L93
+	bgt	.L80
 	.p2align 3,,7
-.L92:
+.L79:
 	mov	w19, 1
 	.p2align 3,,7
-.L98:
+.L85:
 	ldr	x0, [x20]
 	strb	wzr, [sp, 103]
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbz	x0, .L95
+	cbz	x0, .L82
 	add	x1, sp, 103
 	mov	x0, x20
 	mov	x2, 1
 	add	w19, w19, 1
 	bl	_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
 	cmp	w21, w19
-	bne	.L98
-	b	.L117
+	bne	.L85
+	b	.L104
 	.p2align 2,,3
-.L88:
+.L75:
 	mov	x0, x19
 	bl	_ZNSo3putEc
 	ldr	x0, [x22, 8]
 	add	x23, x23, 1
 	add	x21, x21, 3
 	cmp	x0, x23
-	bgt	.L91
-	b	.L99
+	bgt	.L78
+	b	.L86
 	.p2align 2,,3
-.L86:
+.L73:
 	mov	x0, x19
 	bl	_ZNSo3putEc
-	b	.L87
+	b	.L74
 	.p2align 2,,3
-.L84:
+.L71:
 	mov	x0, x20
 	mov	x19, x20
 	bl	_ZNSo3putEc
-	b	.L85
+	b	.L72
 	.p2align 2,,3
-.L78:
+.L65:
 	mov	x0, x20
 	add	x21, x21, 4
 	bl	_ZNSo3putEc
 	cmp	x21, x23
-	beq	.L80
+	beq	.L67
 	ldr	x0, [x20]
 	ldr	w19, [x21, 28]
 	and	w1, w19, 255
@@ -926,8 +641,8 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbnz	x0, .L126
-.L72:
+	cbnz	x0, .L113
+.L59:
 	mov	x0, x20
 	bl	_ZNSo3putEc
 	ldr	x0, [x20]
@@ -936,8 +651,8 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbnz	x0, .L127
-.L74:
+	cbnz	x0, .L114
+.L61:
 	mov	x0, x20
 	bl	_ZNSo3putEc
 	ldr	x0, [x20]
@@ -946,18 +661,18 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbnz	x0, .L128
-.L76:
+	cbnz	x0, .L115
+.L63:
 	mov	x0, x20
 	bl	_ZNSo3putEc
-	b	.L77
+	b	.L64
 	.p2align 2,,3
-.L60:
+.L47:
 	mov	x0, x20
 	add	x24, x24, 4
 	bl	_ZNSo3putEc
 	cmp	x24, x23
-	beq	.L62
+	beq	.L49
 	ldr	x0, [x20]
 	ldr	w19, [x24]
 	and	w1, w19, 255
@@ -965,8 +680,8 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbnz	x0, .L129
-.L54:
+	cbnz	x0, .L116
+.L41:
 	mov	x0, x20
 	bl	_ZNSo3putEc
 	ldr	x0, [x20]
@@ -975,8 +690,8 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbnz	x0, .L130
-.L56:
+	cbnz	x0, .L117
+.L43:
 	mov	x0, x20
 	bl	_ZNSo3putEc
 	ldr	x0, [x20]
@@ -985,39 +700,39 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x0, [x0, 16]
-	cbnz	x0, .L131
-.L58:
+	cbnz	x0, .L118
+.L45:
 	mov	x0, x20
 	bl	_ZNSo3putEc
-	b	.L59
-.L70:
+	b	.L46
+.L57:
 	mov	x0, x19
 	mov	w1, 0
 	bl	_ZNSo3putEc
-	b	.L81
-.L68:
+	b	.L68
+.L55:
 	mov	x0, x19
 	bl	_ZNSo3putEc
-	b	.L69
-.L66:
+	b	.L56
+.L53:
 	mov	x0, x19
 	mov	w1, 0
 	bl	_ZNSo3putEc
-	b	.L67
-.L64:
+	b	.L54
+.L51:
 	mov	x0, x20
 	mov	x19, x20
 	bl	_ZNSo3putEc
-	b	.L65
-.L120:
+	b	.L52
+.L107:
 	ldr	x0, [x22, 24]
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	w1, [x0, 32]
 	orr	w1, w1, 4
 	bl	_ZNSt9basic_iosIcSt11char_traitsIcEE5clearESt12_Ios_Iostate
-	b	.L44
-.L124:
+	b	.L31
+.L111:
 	ldr	x0, [x22, 24]
 	ldp	x21, x22, [sp, 32]
 	ldr	x0, [x0, -24]
@@ -1043,7 +758,7 @@ _ZN7EasyBMP5Image5WriteEv:
 	.cfi_def_cfa_offset 0
 	orr	w1, w1, 4
 	b	_ZNSt9basic_iosIcSt11char_traitsIcEE5clearESt12_Ios_Iostate
-.L121:
+.L108:
 	.cfi_restore_state
 	adrp	x19, _ZSt4cerr
 	add	x20, x19, :lo12:_ZSt4cerr
@@ -1056,11 +771,11 @@ _ZN7EasyBMP5Image5WriteEv:
 	ldr	x0, [x0, -24]
 	add	x0, x20, x0
 	ldr	x19, [x0, 240]
-	cbz	x19, .L132
+	cbz	x19, .L119
 	ldrb	w0, [x19, 56]
-	cbz	w0, .L47
+	cbz	w0, .L34
 	ldrb	w1, [x19, 67]
-.L48:
+.L35:
 	mov	x0, x20
 	bl	_ZNSo3putEc
 	bl	_ZNSo5flushEv
@@ -1072,9 +787,9 @@ _ZN7EasyBMP5Image5WriteEv:
 	add	x0, x0, :lo12:.LC3
 	mov	w2, 290
 	bl	__assert_fail
-.L132:
+.L119:
 	bl	_ZSt16__throw_bad_castv
-.L47:
+.L34:
 	mov	x0, x19
 	bl	_ZNKSt5ctypeIcE13_M_widen_initEv
 	ldr	x1, [x19]
@@ -1082,15 +797,15 @@ _ZN7EasyBMP5Image5WriteEv:
 	add	x0, x0, :lo12:_ZNKSt5ctypeIcE8do_widenEc
 	ldr	x2, [x1, 48]
 	cmp	x2, x0
-	bne	.L133
+	bne	.L120
 	mov	w1, 10
-	b	.L48
-.L133:
+	b	.L35
+.L120:
 	mov	w1, 10
 	mov	x0, x19
 	blr	x2
 	and	w1, w0, 255
-	b	.L48
+	b	.L35
 	.cfi_endproc
 .LFE8411:
 	.size	_ZN7EasyBMP5Image5WriteEv, .-_ZN7EasyBMP5Image5WriteEv
@@ -1195,7 +910,7 @@ _ZN7EasyBMP5ImageC2EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE:
 	ccmp	x21, 0, 4, gt
 	str	xzr, [x24, 8]
 	strb	wzr, [x19, 560]
-	ble	.L164
+	ble	.L151
 	stp	xzr, x22, [x19]
 	adrp	x3, .LC6
 	mov	x0, x24
@@ -1210,7 +925,7 @@ _ZN7EasyBMP5ImageC2EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE:
 	mov	w0, -1
 	strh	w0, [x19, 576]
 	strb	w0, [x19, 578]
-	cbz	x1, .L165
+	cbz	x1, .L152
 	mov	x1, x20
 	mov	x0, x24
 	bl	_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE9_M_assignERKS4_
@@ -1219,7 +934,7 @@ _ZN7EasyBMP5ImageC2EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE:
 	mov	x1, 1152921504606846975
 	mul	x20, x0, x20
 	cmp	x0, x1
-	bhi	.L141
+	bhi	.L128
 	lsl	x0, x0, 3
 .LEHB5:
 	bl	_Znam
@@ -1237,33 +952,33 @@ _ZN7EasyBMP5ImageC2EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE:
 	add	x5, x20, x20, lsl 1
 	add	x5, x0, x5
 	cmp	x0, x5
-	beq	.L144
+	beq	.L131
 	mov	x1, x0
 	add	x2, x19, 576
 	.p2align 3,,7
-.L145:
+.L132:
 	ldrh	w4, [x2]
 	add	x1, x1, 3
 	ldrb	w3, [x2, 2]
 	strh	w4, [x1, -3]
 	strb	w3, [x1, -1]
 	cmp	x5, x1
-	bne	.L145
-.L144:
+	bne	.L132
+.L131:
 	ldr	x3, [x19, 16]
 	cmp	x3, 0
-	ble	.L134
+	ble	.L121
 	ldp	x2, x4, [x19]
 	mov	x1, x0
 	add	x0, x2, x3, lsl 3
 	add	x3, x4, x4, lsl 1
 	.p2align 3,,7
-.L147:
+.L134:
 	str	x1, [x2], 8
 	add	x1, x1, x3
 	cmp	x0, x2
-	bne	.L147
-.L134:
+	bne	.L134
+.L121:
 	ldp	x19, x20, [sp, 16]
 	ldp	x21, x22, [sp, 32]
 	ldp	x23, x24, [sp, 48]
@@ -1285,7 +1000,7 @@ _ZN7EasyBMP5ImageC2EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE:
 	.cfi_restore 20
 	.cfi_def_cfa_offset 0
 	ret
-.L164:
+.L151:
 	.cfi_restore_state
 	adrp	x3, .LC4
 	adrp	x1, .LC2
@@ -1295,7 +1010,7 @@ _ZN7EasyBMP5ImageC2EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE:
 	add	x0, x0, :lo12:.LC5
 	mov	w2, 123
 	bl	__assert_fail
-.L165:
+.L152:
 	adrp	x3, .LC7
 	adrp	x1, .LC2
 	adrp	x0, .LC8
@@ -1304,15 +1019,15 @@ _ZN7EasyBMP5ImageC2EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE:
 	add	x0, x0, :lo12:.LC8
 	mov	w2, 273
 	bl	__assert_fail
-.L156:
+.L143:
 	mov	x20, x0
 	mov	x0, x27
 	bl	_ZNSt13basic_filebufIcSt11char_traitsIcEED1Ev
-.L137:
+.L124:
 	ldr	x0, [x26, -24]
 	str	x26, [x19, 24]
 	str	x28, [x23, x0]
-.L138:
+.L125:
 	str	x25, [x19, 280]
 	mov	x0, x24
 	bl	_ZNSt8ios_baseD2Ev
@@ -1320,16 +1035,16 @@ _ZN7EasyBMP5ImageC2EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE:
 .LEHB6:
 	bl	_Unwind_Resume
 .LEHE6:
-.L155:
+.L142:
 	mov	x20, x0
-	b	.L137
-.L154:
+	b	.L124
+.L141:
 	mov	x20, x0
-	b	.L138
-.L158:
+	b	.L125
+.L145:
 	mov	x19, x0
 	cmp	x1, 1
-	bne	.L150
+	bne	.L137
 	bl	__cxa_begin_catch
 	adrp	x19, _ZSt4cerr
 	add	x19, x19, :lo12:_ZSt4cerr
@@ -1357,13 +1072,13 @@ _ZN7EasyBMP5ImageC2EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE:
 	add	x0, x0, :lo12:.LC3
 	mov	w2, 147
 	bl	__assert_fail
-.L141:
+.L128:
 .LEHB8:
 	bl	__cxa_throw_bad_array_new_length
 .LEHE8:
-.L153:
+.L140:
 	mov	x19, x0
-.L150:
+.L137:
 	mov	x0, x24
 	bl	_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE10_M_disposeEv
 	mov	x0, x23
@@ -1372,10 +1087,10 @@ _ZN7EasyBMP5ImageC2EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE:
 .LEHB9:
 	bl	_Unwind_Resume
 .LEHE9:
-.L157:
+.L144:
 	mov	x19, x0
 	bl	__cxa_end_catch
-	b	.L150
+	b	.L137
 	.cfi_endproc
 .LFE8394:
 	.section	.gcc_except_table._ZN7EasyBMP5ImageC2EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE,"aG",@progbits,_ZN7EasyBMP5ImageC5EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE,comdat
@@ -1390,23 +1105,23 @@ _ZN7EasyBMP5ImageC2EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE:
 .LLSDACSB8394:
 	.uleb128 .LEHB1-.LFB8394
 	.uleb128 .LEHE1-.LEHB1
-	.uleb128 .L154-.LFB8394
+	.uleb128 .L141-.LFB8394
 	.uleb128 0
 	.uleb128 .LEHB2-.LFB8394
 	.uleb128 .LEHE2-.LEHB2
-	.uleb128 .L155-.LFB8394
+	.uleb128 .L142-.LFB8394
 	.uleb128 0
 	.uleb128 .LEHB3-.LFB8394
 	.uleb128 .LEHE3-.LEHB3
-	.uleb128 .L156-.LFB8394
+	.uleb128 .L143-.LFB8394
 	.uleb128 0
 	.uleb128 .LEHB4-.LFB8394
 	.uleb128 .LEHE4-.LEHB4
-	.uleb128 .L153-.LFB8394
+	.uleb128 .L140-.LFB8394
 	.uleb128 0
 	.uleb128 .LEHB5-.LFB8394
 	.uleb128 .LEHE5-.LEHB5
-	.uleb128 .L158-.LFB8394
+	.uleb128 .L145-.LFB8394
 	.uleb128 0x3
 	.uleb128 .LEHB6-.LFB8394
 	.uleb128 .LEHE6-.LEHB6
@@ -1414,11 +1129,11 @@ _ZN7EasyBMP5ImageC2EllRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE:
 	.uleb128 0
 	.uleb128 .LEHB7-.LFB8394
 	.uleb128 .LEHE7-.LEHB7
-	.uleb128 .L157-.LFB8394
+	.uleb128 .L144-.LFB8394
 	.uleb128 0
 	.uleb128 .LEHB8-.LFB8394
 	.uleb128 .LEHE8-.LEHB8
-	.uleb128 .L158-.LFB8394
+	.uleb128 .L145-.LFB8394
 	.uleb128 0x3
 	.uleb128 .LEHB9-.LFB8394
 	.uleb128 .LEHE9-.LEHB9
@@ -1486,14 +1201,14 @@ main:
 	.cfi_offset 72, -704
 	.cfi_offset 73, -696
 	cmp	w0, 2
-	bgt	.L189
+	bgt	.L176
 	mov	x23, 480
 	mov	x22, 640
 	fmov	s9, w23
 	fmov	s8, w22
 	mov	w25, 128
 	mov	w24, 1
-.L167:
+.L154:
 	adrp	x3, .LC11
 	add	x3, x3, :lo12:.LC11
 	add	x4, sp, 128
@@ -1560,11 +1275,11 @@ main:
 	ldr	x0, [x0, -24]
 	add	x0, x19, x0
 	ldr	x22, [x0, 240]
-	cbz	x22, .L190
+	cbz	x22, .L177
 	ldrb	w0, [x22, 56]
-	cbz	w0, .L170
+	cbz	w0, .L157
 	ldrb	w1, [x22, 67]
-.L171:
+.L158:
 	mov	x0, x19
 	bl	_ZNSo3putEc
 	bl	_ZNSo5flushEv
@@ -1573,9 +1288,9 @@ main:
 	sub	w19, w24, #1
 	mov	x25, x0
 	add	x22, x22, :lo12:_ZN23MandelbrotMultiThreadedI11ColorSchemeE19RenderMultiThreadedEPN7EasyBMP5ImageE._omp_fn.0
-	cbz	w24, .L174
+	cbz	w24, .L161
 	.p2align 3,,7
-.L172:
+.L159:
 	sub	w19, w19, #1
 	add	x1, sp, 96
 	mov	x0, x22
@@ -1584,8 +1299,8 @@ main:
 	stp	x21, x20, [sp, 96]
 	bl	GOMP_parallel
 	cmn	w19, #1
-	bne	.L172
-.L174:
+	bne	.L159
+.L161:
 	bl	_ZNSt6chrono3_V212system_clock3nowEv
 	sub	x25, x0, x25
 	adrp	x1, .LC14
@@ -1644,7 +1359,7 @@ main:
 	.cfi_restore 73
 	.cfi_def_cfa_offset 0
 	ret
-.L170:
+.L157:
 	.cfi_restore_state
 	mov	x0, x22
 	bl	_ZNKSt5ctypeIcE13_M_widen_initEv
@@ -1653,10 +1368,10 @@ main:
 	add	x0, x0, :lo12:_ZNKSt5ctypeIcE8do_widenEc
 	ldr	x2, [x1, 48]
 	cmp	x2, x0
-	bne	.L191
+	bne	.L178
 	mov	w1, 10
-	b	.L171
-.L189:
+	b	.L158
+.L176:
 	mov	x20, x1
 	mov	w19, w0
 	mov	w2, 10
@@ -1671,7 +1386,7 @@ main:
 	bl	__isoc23_strtol
 	fmov	s9, w0
 	cmp	w19, 3
-	beq	.L192
+	beq	.L179
 	sxtw	x23, w0
 	mov	w2, 10
 	ldr	x0, [x20, 24]
@@ -1680,39 +1395,39 @@ main:
 	bl	__isoc23_strtol
 	mov	w25, w0
 	cmp	w19, 4
-	bne	.L193
+	bne	.L180
 	mov	w24, 1
-	b	.L167
-.L193:
+	b	.L154
+.L180:
 	ldr	x0, [x20, 32]
 	mov	w2, 10
 	mov	x1, 0
 	bl	__isoc23_strtol
 	mov	w24, w0
-	b	.L167
-.L192:
+	b	.L154
+.L179:
 	sxtw	x22, w22
 	sxtw	x23, w0
 	mov	w25, 128
 	mov	w24, 1
-	b	.L167
-.L191:
+	b	.L154
+.L178:
 	mov	x0, x22
 	mov	w1, 10
 	blr	x2
 	and	w1, w0, 255
-	b	.L171
-.L190:
+	b	.L158
+.L177:
 	bl	_ZSt16__throw_bad_castv
 .LEHE11:
-.L180:
+.L167:
 	mov	x19, x0
 	mov	x0, x21
 	bl	_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE10_M_disposeEv
 	mov	x0, x19
 .LEHB12:
 	bl	_Unwind_Resume
-.L181:
+.L168:
 	mov	x19, x0
 	mov	x0, x20
 	bl	_ZN7EasyBMP5ImageD1Ev
@@ -1730,11 +1445,11 @@ main:
 .LLSDACSB8423:
 	.uleb128 .LEHB10-.LFB8423
 	.uleb128 .LEHE10-.LEHB10
-	.uleb128 .L180-.LFB8423
+	.uleb128 .L167-.LFB8423
 	.uleb128 0
 	.uleb128 .LEHB11-.LFB8423
 	.uleb128 .LEHE11-.LEHB11
-	.uleb128 .L181-.LFB8423
+	.uleb128 .L168-.LFB8423
 	.uleb128 0
 	.uleb128 .LEHB12-.LFB8423
 	.uleb128 .LEHE12-.LEHB12
@@ -1743,6 +1458,614 @@ main:
 .LLSDACSE8423:
 	.section	.text.startup
 	.size	main, .-main
+	.section	.text._ZN23MandelbrotMultiThreadedI11ColorSchemeE12LineRendererEiPN7EasyBMP5ImageE,"axG",@progbits,_ZN23MandelbrotMultiThreadedI11ColorSchemeE12LineRendererEiPN7EasyBMP5ImageE,comdat
+	.align	2
+	.p2align 4,,11
+	.weak	_ZN23MandelbrotMultiThreadedI11ColorSchemeE12LineRendererEiPN7EasyBMP5ImageE
+	.type	_ZN23MandelbrotMultiThreadedI11ColorSchemeE12LineRendererEiPN7EasyBMP5ImageE, %function
+_ZN23MandelbrotMultiThreadedI11ColorSchemeE12LineRendererEiPN7EasyBMP5ImageE:
+.LFB9012:
+	.cfi_startproc
+	sub	sp, sp, #896
+	.cfi_def_cfa_offset 896
+	mov	x15, x0
+	mov	x4, 0
+	mov	x0, 0
+	bfi	x4, x0, 0, 32
+	fmov	s1, 3.0e+0
+	stp	x29, x30, [sp]
+	.cfi_offset 29, -896
+	.cfi_offset 30, -888
+	mov	x29, sp
+	mov	x3, 0
+	ldr	q24, [x15, 12]
+	mov	x6, 0
+	bfi	x6, x3, 0, 32
+	mov	x7, 0
+	fmov	s0, 8.0e+0
+	ldr	s2, [x15, 28]
+	fadd	s3, s24, s24
+	fmov	w0, s24
+	fmul	s1, s1, s24
+	fmov	w3, s24
+	fmadd	s0, s0, s24, s2
+	scvtf	s6, w1
+	mov	w16, w1
+	mov	x5, 0
+	bfi	x6, x0, 32, 32
+	fmov	w0, s3
+	bfi	x4, x3, 32, 32
+	fmov	w3, s1
+	fmov	w1, s3
+	ldr	s5, [x15, 16]
+	dup	v2.4s, v2.s[0]
+	ldr	s17, [x15, 36]
+	bfi	x7, x0, 0, 32
+	fmov	w0, s1
+	fmov	d1, x6
+	fnmsub	s17, s6, s5, s17
+	bfi	x7, x3, 32, 32
+	bfi	x5, x1, 0, 32
+	dup	v0.4s, v0.s[0]
+	ldr	w1, [x15, 4]
+	ins	v1.d[1], x7
+	bfi	x5, x0, 32, 32
+	adrp	x0, .LC22
+	ldr	q4, [x0, #:lo12:.LC22]
+	add	x0, sp, 367
+	fadd	v3.4s, v2.4s, v1.4s
+	and	x0, x0, -32
+	fmov	d1, x4
+	fmla	v2.4s, v4.4s, v24.s[0]
+	ins	v1.d[1], x5
+	stp	q3, q2, [x0, 448]
+	fadd	v1.4s, v0.4s, v1.4s
+	fmla	v0.4s, v4.4s, v24.s[0]
+	ldp	q2, q3, [x0, 448]
+	stp	q1, q0, [x0, 480]
+	ldp	q0, q1, [x0, 480]
+	stp	q2, q3, [sp, 304]
+	stp	q0, q1, [sp, 272]
+	cmp	w1, 0
+	ble	.L181
+	stp	x19, x20, [sp, 16]
+	.cfi_offset 20, -872
+	.cfi_offset 19, -880
+	sub	w20, w1, #1
+	ldr	s18, [x15, 8]
+	lsr	w20, w20, 4
+	mov	w1, 48
+	add	w20, w20, 1
+	mov	x17, x2
+	dup	v17.4s, v17.s[0]
+	sbfiz	x16, x16, 3, 32
+	fmov	v19.4s, 4.0e+0
+	add	x14, x0, 320
+	umull	x20, w20, w1
+	add	x13, x0, 352
+	dup	v18.4s, v18.s[0]
+	add	x12, x0, 384
+	add	x11, x0, 416
+	add	x10, x0, 512
+	add	x9, x0, 64
+	add	x8, x0, 96
+	add	x7, x0, 128
+	add	x6, x0, 160
+	add	x5, x0, 192
+	add	x4, x0, 224
+	add	x30, x0, 256
+	add	x18, x0, 288
+	add	x19, x0, 32
+	mov	x3, 0
+	fmov	s25, 1.6e+1
+	stp	x21, x22, [sp, 32]
+	.cfi_offset 22, -856
+	.cfi_offset 21, -864
+	stp	x23, x24, [sp, 48]
+	.cfi_offset 24, -840
+	.cfi_offset 23, -848
+	str	x25, [sp, 64]
+	.cfi_offset 25, -832
+	str	d8, [sp, 72]
+	.cfi_offset 72, -824
+	.p2align 3,,7
+.L183:
+	adrp	x1, .LC23
+	add	x1, x1, :lo12:.LC23
+	ldp	q22, q23, [sp, 272]
+	stp	xzr, xzr, [sp, 144]
+	ld1	{v0.16b - v1.16b}, [x1]
+	add	x1, sp, 80
+	ldp	q21, q20, [sp, 304]
+	stp	xzr, xzr, [sp, 160]
+	st1	{v0.16b - v1.16b}, [x1]
+	add	x1, sp, 112
+	stp	xzr, xzr, [sp, 176]
+	stp	xzr, xzr, [sp, 192]
+	stp	xzr, xzr, [sp, 208]
+	stp	xzr, xzr, [sp, 224]
+	stp	xzr, xzr, [sp, 240]
+	stp	xzr, xzr, [sp, 256]
+	st1	{v0.16b - v1.16b}, [x1]
+	.p2align 3,,7
+.L184:
+	ldp	q5, q4, [sp, 176]
+	ldp	q3, q2, [sp, 208]
+	ldp	q26, q16, [sp, 240]
+	ldp	q28, q27, [sp, 144]
+	fmul	v6.4s, v5.4s, v5.4s
+	fmul	v7.4s, v4.4s, v4.4s
+	fmul	v1.4s, v3.4s, v3.4s
+	fmul	v0.4s, v2.4s, v2.4s
+	fmul	v5.4s, v5.4s, v26.4s
+	fmul	v4.4s, v4.4s, v16.4s
+	fneg	v8.4s, v6.4s
+	fneg	v31.4s, v7.4s
+	fneg	v30.4s, v1.4s
+	fmul	v3.4s, v3.4s, v28.4s
+	fneg	v29.4s, v0.4s
+	fmul	v2.4s, v2.4s, v27.4s
+	fadd	v5.4s, v5.4s, v5.4s
+	fadd	v4.4s, v4.4s, v4.4s
+	fmla	v29.4s, v27.4s, v27.4s
+	fmla	v8.4s, v26.4s, v26.4s
+	fmla	v31.4s, v16.4s, v16.4s
+	fmla	v30.4s, v28.4s, v28.4s
+	fadd	v5.4s, v17.4s, v5.4s
+	fadd	v4.4s, v17.4s, v4.4s
+	fadd	v3.4s, v3.4s, v3.4s
+	fadd	v2.4s, v2.4s, v2.4s
+	fadd	v8.4s, v8.4s, v21.4s
+	fadd	v31.4s, v31.4s, v20.4s
+	stp	q5, q4, [x0, 320]
+	fadd	v3.4s, v17.4s, v3.4s
+	fadd	v5.4s, v29.4s, v23.4s
+	fadd	v2.4s, v17.4s, v2.4s
+	stp	q8, q31, [x0, 384]
+	fadd	v30.4s, v30.4s, v22.4s
+	fmla	v1.4s, v28.4s, v28.4s
+	str	q5, [x0, 432]
+	fmla	v0.4s, v27.4s, v27.4s
+	stp	q3, q2, [x0, 352]
+	ldp	q8, q28, [x14]
+	str	q30, [x0, 416]
+	ldp	q2, q3, [x13]
+	stp	q8, q28, [sp, 176]
+	ldp	q4, q5, [x11]
+	stp	q2, q3, [sp, 208]
+	ldp	q29, q31, [x12]
+	stp	q4, q5, [sp, 144]
+	fcmgt	v1.4s, v19.4s, v1.4s
+	fcmgt	v0.4s, v19.4s, v0.4s
+	stp	q29, q31, [sp, 240]
+	fmla	v7.4s, v16.4s, v16.4s
+	fmla	v6.4s, v26.4s, v26.4s
+	stp	q1, q0, [x10]
+	ldr	q8, [sp, 80]
+	stp	q18, q18, [x0, 128]
+	ldp	q5, q2, [x7]
+	stp	q18, q18, [x0, 64]
+	ldp	q4, q3, [x9]
+	cmeq	v5.4s, v5.4s, v8.4s
+	ldr	q8, [sp, 96]
+	fcmgt	v6.4s, v19.4s, v6.4s
+	fcmgt	v7.4s, v19.4s, v7.4s
+	cmeq	v2.4s, v2.4s, v8.4s
+	ldr	q8, [sp, 128]
+	stp	q5, q2, [x0, 160]
+	cmeq	v3.4s, v3.4s, v8.4s
+	ldr	q8, [sp, 112]
+	cmeq	v4.4s, v4.4s, v8.4s
+	stp	q4, q3, [x0, 96]
+	ldp	q16, q4, [x6]
+	ldp	q5, q8, [x8]
+	bic	v3.16b, v1.16b, v16.16b
+	bic	v27.16b, v0.16b, v4.16b
+	bic	v2.16b, v6.16b, v5.16b
+	bic	v4.16b, v0.16b, v4.16b
+	bic	v26.16b, v7.16b, v8.16b
+	orr	v3.16b, v3.16b, v27.16b
+	bic	v16.16b, v1.16b, v16.16b
+	bic	v5.16b, v6.16b, v5.16b
+	orr	v1.16b, v2.16b, v26.16b
+	dup	d0, v3.d[1]
+	bic	v8.16b, v7.16b, v8.16b
+	stp	q16, q4, [x0, 224]
+	ldp	q2, q4, [x4]
+	orr	v0.8b, v0.8b, v3.8b
+	dup	d6, v1.d[1]
+	stp	q5, q8, [x0, 192]
+	ldp	q5, q3, [x5]
+	fmov	x1, d0
+	ldr	q0, [sp, 96]
+	sub	v4.4s, v0.4s, v4.4s
+	orr	v0.8b, v6.8b, v1.8b
+	ldr	q1, [sp, 128]
+	fmov	x2, d0
+	ldr	q0, [sp, 80]
+	orr	x1, x1, x2
+	add	x2, sp, 112
+	sub	v0.4s, v0.4s, v2.4s
+	sub	v2.4s, v1.4s, v3.4s
+	ldr	q1, [sp, 112]
+	stp	q0, q4, [x0, 288]
+	sub	v1.4s, v1.4s, v5.4s
+	stp	q1, q2, [x0, 256]
+	ld1	{v0.16b - v1.16b}, [x30]
+	st1	{v0.16b - v1.16b}, [x2]
+	add	x2, sp, 80
+	ld1	{v0.16b - v1.16b}, [x18]
+	st1	{v0.16b - v1.16b}, [x2]
+	cbnz	x1, .L184
+	ldr	w1, [sp, 112]
+	fmul	s0, s24, s25
+	ldr	x22, [x17]
+	negs	w2, w1
+	and	w2, w2, 15
+	and	w1, w1, 15
+	dup	v0.4s, v0.s[0]
+	csneg	w2, w1, w2, mi
+	ldr	x1, [sp, 112]
+	sbfiz	x23, x2, 1, 32
+	ldr	x22, [x22, x16]
+	add	x2, x23, w2, sxtw
+	add	x2, x15, x2
+	asr	x21, x1, 32
+	add	x23, x22, x3
+	negs	w1, w21
+	and	w1, w1, 15
+	and	w21, w21, 15
+	ldrh	w24, [x2, 40]
+	csneg	w1, w21, w1, mi
+	fadd	v21.4s, v0.4s, v21.4s
+	ldrb	w21, [x2, 42]
+	strh	w24, [x22, x3]
+	sbfiz	x2, x1, 1, 32
+	strb	w21, [x23, 2]
+	add	x1, x2, w1, sxtw
+	add	x2, x15, x1
+	add	x21, x3, 3
+	ldr	x23, [x17]
+	ldrh	w22, [x2, 40]
+	ldrb	w24, [x2, 42]
+	ldr	x2, [x23, x16]
+	fadd	v20.4s, v0.4s, v20.4s
+	ldr	w1, [sp, 120]
+	fadd	v22.4s, v0.4s, v22.4s
+	add	x23, x2, x21
+	strh	w22, [x2, x21]
+	negs	w1, w1
+	ldr	w2, [sp, 120]
+	and	w1, w1, 15
+	strb	w24, [x23, 2]
+	add	x22, x3, 6
+	and	w2, w2, 15
+	stp	q21, q20, [x0]
+	csneg	w1, w2, w1, mi
+	ldr	x2, [sp, 120]
+	ldr	x23, [x17]
+	fadd	v0.4s, v0.4s, v23.4s
+	asr	x21, x2, 32
+	sbfiz	x2, x1, 1, 32
+	ldr	x23, [x23, x16]
+	add	x2, x2, w1, sxtw
+	negs	w1, w21
+	add	x2, x15, x2
+	and	w21, w21, 15
+	and	w1, w1, 15
+	csneg	w1, w21, w1, mi
+	add	x21, x23, x22
+	ldp	q2, q3, [x0]
+	stp	q22, q0, [x0, 32]
+	ldrh	w25, [x2, 40]
+	ldrb	w24, [x2, 42]
+	sbfiz	x2, x1, 1, 32
+	add	x1, x2, w1, sxtw
+	strh	w25, [x23, x22]
+	add	x1, x15, x1
+	strb	w24, [x21, 2]
+	ldp	q0, q1, [x19]
+	stp	q2, q3, [sp, 304]
+	ldr	w2, [sp, 128]
+	ldr	x24, [x17]
+	negs	w2, w2
+	ldrb	w23, [x1, 42]
+	and	w2, w2, 15
+	ldrh	w25, [x1, 40]
+	add	x21, x3, 9
+	ldr	w1, [sp, 128]
+	add	x22, x3, 12
+	ldr	x24, [x24, x16]
+	and	w1, w1, 15
+	csneg	w1, w1, w2, mi
+	stp	q0, q1, [sp, 272]
+	sbfiz	x2, x1, 1, 32
+	strh	w25, [x24, x21]
+	add	x1, x2, w1, sxtw
+	add	x2, x15, x1
+	add	x1, x24, x21
+	ldr	x21, [sp, 128]
+	strb	w23, [x1, 2]
+	ldr	x23, [x17]
+	asr	x21, x21, 32
+	negs	w1, w21
+	and	w21, w21, 15
+	and	w1, w1, 15
+	ldrh	w25, [x2, 40]
+	csneg	w1, w21, w1, mi
+	ldrb	w24, [x2, 42]
+	ldr	x21, [x23, x16]
+	sbfiz	x2, x1, 1, 32
+	add	x1, x2, w1, sxtw
+	add	x23, x21, x22
+	add	x2, x15, x1
+	strh	w25, [x21, x22]
+	add	x21, x3, 15
+	ldr	w1, [sp, 136]
+	strb	w24, [x23, 2]
+	negs	w1, w1
+	ldr	x22, [x17]
+	and	w1, w1, 15
+	ldrh	w24, [x2, 40]
+	ldrb	w23, [x2, 42]
+	ldr	x2, [x22, x16]
+	ldr	w22, [sp, 136]
+	and	w22, w22, 15
+	strh	w24, [x2, x21]
+	csneg	w1, w22, w1, mi
+	add	x22, x2, x21
+	add	x21, x3, 18
+	sbfiz	x2, x1, 1, 32
+	strb	w23, [x22, 2]
+	add	x1, x2, w1, sxtw
+	ldr	x2, [sp, 136]
+	add	x1, x15, x1
+	ldr	x22, [x17]
+	asr	x2, x2, 32
+	ldrh	w24, [x1, 40]
+	ldrb	w23, [x1, 42]
+	negs	w1, w2
+	ldr	x22, [x22, x16]
+	and	w2, w2, 15
+	and	w1, w1, 15
+	csneg	w1, w2, w1, mi
+	add	x25, x22, x21
+	strh	w24, [x22, x21]
+	add	x21, x3, 21
+	sbfiz	x2, x1, 1, 32
+	add	x1, x2, w1, sxtw
+	strb	w23, [x25, 2]
+	add	x2, x15, x1
+	ldr	w1, [sp, 80]
+	ldr	x22, [x17]
+	negs	w1, w1
+	ldrh	w24, [x2, 40]
+	and	w1, w1, 15
+	ldrb	w23, [x2, 42]
+	ldr	x2, [x22, x16]
+	ldr	w22, [sp, 80]
+	and	w22, w22, 15
+	strh	w24, [x2, x21]
+	csneg	w1, w22, w1, mi
+	add	x22, x2, x21
+	add	x21, x3, 24
+	sbfiz	x2, x1, 1, 32
+	strb	w23, [x22, 2]
+	add	x1, x2, w1, sxtw
+	ldr	x2, [sp, 80]
+	add	x1, x15, x1
+	ldr	x22, [x17]
+	asr	x2, x2, 32
+	ldrb	w23, [x1, 42]
+	ldrh	w25, [x1, 40]
+	negs	w1, w2
+	ldr	x22, [x22, x16]
+	and	w2, w2, 15
+	and	w1, w1, 15
+	add	x24, x22, x21
+	csneg	w1, w2, w1, mi
+	strh	w25, [x22, x21]
+	add	x21, x3, 27
+	sbfiz	x2, x1, 1, 32
+	strb	w23, [x24, 2]
+	add	x1, x2, w1, sxtw
+	add	x2, x15, x1
+	ldr	w1, [sp, 88]
+	ldr	x22, [x17]
+	negs	w1, w1
+	ldrh	w24, [x2, 40]
+	and	w1, w1, 15
+	ldrb	w23, [x2, 42]
+	ldr	x2, [x22, x16]
+	ldr	w22, [sp, 88]
+	and	w22, w22, 15
+	strh	w24, [x2, x21]
+	csneg	w1, w22, w1, mi
+	add	x22, x2, x21
+	add	x21, x3, 30
+	sbfiz	x2, x1, 1, 32
+	strb	w23, [x22, 2]
+	add	x1, x2, w1, sxtw
+	ldr	x2, [sp, 88]
+	add	x1, x15, x1
+	ldr	x22, [x17]
+	asr	x2, x2, 32
+	ldrb	w23, [x1, 42]
+	ldrh	w24, [x1, 40]
+	negs	w1, w2
+	ldr	x22, [x22, x16]
+	and	w2, w2, 15
+	and	w1, w1, 15
+	add	x25, x22, x21
+	csneg	w1, w2, w1, mi
+	strh	w24, [x22, x21]
+	add	x21, x3, 33
+	sbfiz	x2, x1, 1, 32
+	strb	w23, [x25, 2]
+	add	x1, x2, w1, sxtw
+	add	x2, x15, x1
+	ldr	w1, [sp, 96]
+	ldr	x22, [x17]
+	negs	w1, w1
+	ldrh	w24, [x2, 40]
+	and	w1, w1, 15
+	ldrb	w23, [x2, 42]
+	ldr	x2, [x22, x16]
+	ldr	w22, [sp, 96]
+	and	w22, w22, 15
+	strh	w24, [x2, x21]
+	csneg	w1, w22, w1, mi
+	add	x22, x2, x21
+	add	x21, x3, 36
+	sbfiz	x2, x1, 1, 32
+	strb	w23, [x22, 2]
+	add	x1, x2, w1, sxtw
+	ldr	x2, [sp, 96]
+	add	x1, x15, x1
+	ldr	x22, [x17]
+	asr	x2, x2, 32
+	ldrh	w24, [x1, 40]
+	ldrb	w23, [x1, 42]
+	negs	w1, w2
+	ldr	x22, [x22, x16]
+	and	w2, w2, 15
+	and	w1, w1, 15
+	add	x25, x22, x21
+	csneg	w1, w2, w1, mi
+	strh	w24, [x22, x21]
+	add	x21, x3, 39
+	sbfiz	x2, x1, 1, 32
+	ldr	w22, [sp, 104]
+	strb	w23, [x25, 2]
+	add	x1, x2, w1, sxtw
+	ldr	w2, [sp, 104]
+	add	x1, x15, x1
+	ldr	x23, [x17]
+	negs	w2, w2
+	and	w24, w22, 15
+	and	w2, w2, 15
+	ldrh	w22, [x1, 40]
+	csneg	w2, w24, w2, mi
+	ldrb	w24, [x1, 42]
+	ldr	x1, [x23, x16]
+	sbfiz	x23, x2, 1, 32
+	add	x2, x23, w2, sxtw
+	add	x23, x1, x21
+	add	x2, x15, x2
+	strh	w22, [x1, x21]
+	add	x22, x3, 42
+	ldr	x1, [sp, 104]
+	strb	w24, [x23, 2]
+	ldrb	w23, [x2, 42]
+	asr	x21, x1, 32
+	ldrh	w25, [x2, 40]
+	negs	w1, w21
+	and	w21, w21, 15
+	ldr	x2, [x17]
+	and	w1, w1, 15
+	csneg	w1, w21, w1, mi
+	sbfiz	x21, x1, 1, 32
+	add	x1, x21, w1, sxtw
+	ldr	x21, [x2, x16]
+	add	x1, x15, x1
+	add	x2, x3, 45
+	add	x3, x3, 48
+	add	x24, x21, x22
+	strh	w25, [x21, x22]
+	strb	w23, [x24, 2]
+	ldr	x21, [x17]
+	ldrb	w22, [x1, 42]
+	ldrh	w23, [x1, 40]
+	ldr	x1, [x21, x16]
+	add	x21, x1, x2
+	strh	w23, [x1, x2]
+	strb	w22, [x21, 2]
+	cmp	x3, x20
+	bne	.L183
+	ldp	x19, x20, [sp, 16]
+	.cfi_restore 20
+	.cfi_restore 19
+	ldp	x21, x22, [sp, 32]
+	.cfi_restore 22
+	.cfi_restore 21
+	ldp	x23, x24, [sp, 48]
+	.cfi_restore 24
+	.cfi_restore 23
+	ldr	x25, [sp, 64]
+	.cfi_restore 25
+	ldr	d8, [sp, 72]
+	.cfi_restore 72
+.L181:
+	ldp	x29, x30, [sp]
+	add	sp, sp, 896
+	.cfi_restore 29
+	.cfi_restore 30
+	.cfi_def_cfa_offset 0
+	ret
+	.cfi_endproc
+.LFE9012:
+	.size	_ZN23MandelbrotMultiThreadedI11ColorSchemeE12LineRendererEiPN7EasyBMP5ImageE, .-_ZN23MandelbrotMultiThreadedI11ColorSchemeE12LineRendererEiPN7EasyBMP5ImageE
+	.text
+	.align	2
+	.p2align 4,,11
+	.type	_ZN23MandelbrotMultiThreadedI11ColorSchemeE19RenderMultiThreadedEPN7EasyBMP5ImageE._omp_fn.0, %function
+_ZN23MandelbrotMultiThreadedI11ColorSchemeE19RenderMultiThreadedEPN7EasyBMP5ImageE._omp_fn.0:
+.LFB9240:
+	.cfi_startproc
+	stp	x29, x30, [sp, -64]!
+	.cfi_def_cfa_offset 64
+	.cfi_offset 29, -64
+	.cfi_offset 30, -56
+	mov	x1, x0
+	mov	x3, 1
+	mov	x29, sp
+	stp	x21, x22, [sp, 32]
+	add	x5, sp, 56
+	add	x4, sp, 48
+	.cfi_offset 21, -32
+	.cfi_offset 22, -24
+	ldp	x21, x22, [x1]
+	mov	x2, x3
+	mov	x0, 0
+	ldrsw	x1, [x21]
+	bl	GOMP_loop_nonmonotonic_dynamic_start
+	tbz	x0, 0, .L189
+	stp	x19, x20, [sp, 16]
+	.cfi_offset 20, -40
+	.cfi_offset 19, -48
+	.p2align 3,,7
+.L191:
+	ldr	w19, [sp, 48]
+	ldr	w20, [sp, 56]
+	.p2align 3,,7
+.L190:
+	mov	w1, w19
+	mov	x2, x22
+	mov	x0, x21
+	add	w19, w19, 1
+	bl	_ZN23MandelbrotMultiThreadedI11ColorSchemeE12LineRendererEiPN7EasyBMP5ImageE
+	cmp	w20, w19
+	bgt	.L190
+	add	x1, sp, 56
+	add	x0, sp, 48
+	bl	GOMP_loop_nonmonotonic_dynamic_next
+	tbnz	x0, 0, .L191
+	ldp	x19, x20, [sp, 16]
+	.cfi_restore 20
+	.cfi_restore 19
+.L189:
+	bl	GOMP_loop_end_nowait
+	ldp	x21, x22, [sp, 32]
+	ldp	x29, x30, [sp], 64
+	.cfi_restore 30
+	.cfi_restore 29
+	.cfi_restore 21
+	.cfi_restore 22
+	.cfi_def_cfa_offset 0
+	ret
+	.cfi_endproc
+.LFE9240:
+	.size	_ZN23MandelbrotMultiThreadedI11ColorSchemeE19RenderMultiThreadedEPN7EasyBMP5ImageE._omp_fn.0, .-_ZN23MandelbrotMultiThreadedI11ColorSchemeE19RenderMultiThreadedEPN7EasyBMP5ImageE._omp_fn.0
 	.section	.rodata.cst16,"aM",@progbits,16
 	.align	4
 .LC17:
@@ -1809,6 +2132,20 @@ main:
 .LC21:
 	.word	-1598689907
 	.word	1051772663
+	.section	.rodata.cst16
+	.align	4
+.LC22:
+	.word	1082130432
+	.word	1084227584
+	.word	1086324736
+	.word	1088421888
+	.section	.rodata
+	.align	4
+.LC23:
+	.xword	0
+	.xword	0
+	.xword	0
+	.xword	0
 	.hidden	DW.ref._ZTISt9bad_alloc
 	.weak	DW.ref._ZTISt9bad_alloc
 	.section	.data.DW.ref._ZTISt9bad_alloc,"awG",@progbits,DW.ref._ZTISt9bad_alloc,comdat

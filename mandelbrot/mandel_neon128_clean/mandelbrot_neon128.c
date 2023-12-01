@@ -76,7 +76,8 @@ int main(int argc, char* argv[])
               && vgetq_lane_u32(vcgeq_f32(mk, vdupq_n_f32(iterations)),3)
               && vgetq_lane_u32(vcltq_f32(zrzi,threshold),0)
               && vgetq_lane_u32(vcltq_f32(zrzi,threshold),1)
-              && vgetq_lane_u32(vcltq
+              && vgetq_lane_u32(vcltq_f32(zrzi,threshold),2)
+              && vgetq_lane_u32(vcltq_f32(zrzi,threshold),3)) {
 
 
 
@@ -110,7 +111,7 @@ int main(int argc, char* argv[])
     //         s->iterations);
     for (int i = 0; i < 4; i++)
         c0123 = vsetq_lane_f32(i, c0123, i); //recurse through the 4 lane vector (resolution) using c0123
-    for (int y = 0; y < s->height; y++) {
+    for (int j = 0; j < s->height; j++) {
         for (int i = 0; i < s->width; i += 4) {
             float32x4_t mx = vaddq_f32(vdupq_n_f32(x), c0123);
             float32x4_t my = vdupq_n_f32(y);

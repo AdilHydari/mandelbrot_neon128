@@ -1,0 +1,1 @@
+Some code shamelessly stolen from: ![ttsiodras](https://github.com/ttsiodras/MandelbrotSSE)

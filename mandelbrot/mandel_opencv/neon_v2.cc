@@ -111,7 +111,7 @@ int main()
     computeMandelbrot(mandelbrotImg);
 
     cv::cvtColor(mandelbrotImg, mandelbrotImg, cv::COLOR_HSV2BGR);
-    cv::imwrite("/home/adilh/Downloads/mandelbrot/mandel_opencv/img/mandel.png", mandelbrotImg);
+    cv::imwrite("/home/adilh/Downloads/mandelbrot/mandelbrot/mandel_opencv/img/mandel.png", mandelbrotImg);
 
     return 0;
 }
